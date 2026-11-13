@@ -1,0 +1,88 @@
+HOW TO FIND SPECIFIC OS PROGRAMS IN psc/
+==========================================
+
+1. BROWSE BY TOPIC FOLDER
+-------------------------
+  exact_solutions/                       -> EXACT easiest solutions for all 34 questions in os questions.docx
+  01_synchronization_and_shared_memory/  -> race conditions, bounded buffer, mutex, semaphores, monitors
+  02_multithreading/                     -> pthreads, stats, matrix, fibonacci, bank, parallel sum
+  03_cpu_scheduling/                     -> FCFS, SJF, SRTF, RR, Priority, MLQ, MLFQ, HRRN
+  04_pipes_and_ipc/                      -> pipe(), mkfifo(), shm_open(), signals (kill/SIGUSR1)
+  05_process_management_fork/            -> fork(), wait(), exit status, orphan, zombie, execvp()
+  06_file_handling_and_commands/         -> open/read/write/lseek/stat, cd, ls, mkdir, grep, cat, cp, sort
+
+2. SEARCH FROM TERMINAL
+-----------------------
+  Find by filename:
+    find psc -name "*pipe*"
+
+  Find by keyword inside code:
+    grep -rn "mkfifo" psc/
+
+3. COMPILE AND RUN ANY FILE
+---------------------------
+  clang -pthread path/to/file.c -o out && ./out
+
+4. QUICK FILE DIRECTORY (49 C PROGRAMS)
+---------------------------------------
+[01_synchronization_and_shared_memory]
+  race_condition.c             : shared memory race condition (+200 / +100)
+  adjusted_sleep.c             : race condition with adjusted sleep timings
+  bounded_buffer_semaphore.c   : 5 producers, 10 consumers using sem_open
+  bounded_buffer_monitor.c     : bounded buffer using mutex + condition vars
+  dining_philosophers.c        : deadlock-free dining philosophers
+  readers_writers.c            : readers-priority readers-writers problem
+  peterson_solution.c          : Peterson's 2-thread mutual exclusion
+
+[02_multithreading]
+  stats_pthreads.c             : avg, min, max from CLI args (3 threads)
+  matrix_ops.c                 : 40x40 binary matrix (A+B)*(A-B)
+  prefix_product.c             : N threads for prefix products
+  fibonacci_thread.c           : child thread generates Fibonacci sequence
+  bank_transactions.c          : mutex-protected deposits/withdrawals/transfers
+  multithreaded_sum.c          : parallel array sum across 4 threads
+  thread_pool_counter.c        : pthread_mutex vs stdatomic counter
+
+[03_cpu_scheduling]
+  cpu_scheduling_all.c         : FCFS, SJF, RR (t=2), Priority
+  srtf_scheduling.c            : Shortest Remaining Time First (preemptive)
+  mlq_scheduling.c             : Multi-Level Queue (System vs User)
+  mlfq_scheduling.c            : Multilevel Feedback Queue + Gantt chart
+  hrrn_scheduling.c            : Highest Response Ratio Next
+  priority_preemptive.c        : Preemptive Priority Scheduling
+
+[04_pipes_and_ipc]
+  pipe_factorial.c             : parent sends n via pipe, child computes n!
+  two_pipes_case_toggle.c      : 2 pipes, child toggles letter case
+  named_pipe_vowels.c          : FIFO sentence transfer + vowel count
+  my_npipe_reader.c            : standalone FIFO reader (/tmp/mypipe)
+  my_npipe_writer.c            : standalone FIFO writer (/tmp/mypipe)
+  shared_memory_ipc.c          : POSIX shm_open + mmap message passing
+  signal_ipc.c                 : child sends SIGUSR1 to parent
+
+[05_process_management_fork]
+  wait_status.c                : child PID + wait status in dec and hex
+  fork_variable.c              : copy-on-write variable x=1000 demo
+  fork_shared_fd.c             : shared file descriptor across fork()
+  collatz_fork.c               : Collatz sequence in child process
+  orphan_process.c             : parent exits early, child adopted by PID 1
+  zombie_process.c             : child exits before parent calls wait()
+  exec_command.c               : fork() + execvp("ls", "-l") + wait()
+
+[06_file_handling_and_commands]
+  file_operations.c            : create, read, write, link/unlink, copy, reverse
+  read_15_chars.c              : read max 15 chars from stdin
+  append_20_chars.c            : append 20 chars from F1.txt to F2.txt
+  merge_txt_files.c            : merge all .txt files, return fd
+  last_5_chars.c               : print last 5 chars using lseek()
+  slice_15_to_20.c             : copy chars 15..20 from F1.txt to F2.txt
+  cmd_cd.c                     : simulate cd
+  cmd_ls.c                     : simulate ls
+  cmd_mkdir.c                  : simulate mkdir
+  cmd_grep.c                   : simulate grep
+  cmd_cat.c                    : simulate cat
+  cmd_cp.c                     : simulate cp
+  file_stat_info.c             : print file metadata via stat()
+  cmd_line_args.c              : print argc and argv[]
+  sort_timing.c                : insertion, selection, bubble sort timing
+
